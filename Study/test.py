@@ -5,3 +5,4 @@ sess = tf.Session()
 print(sess.run(hello))
 
 print('aaa')
+print('aaa')
