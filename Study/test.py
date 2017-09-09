@@ -7,7 +7,6 @@ print(sess.run(hello))
 
 
 #
-import tensorflow as tf
 import  numpy as np
 
 #creat data
