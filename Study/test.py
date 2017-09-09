@@ -64,3 +64,5 @@ sess.close()
 with tf.Session() as sess:
     result2 = sess.run(product)
     print(result2)
+
+
