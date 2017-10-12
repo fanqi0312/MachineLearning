@@ -48,8 +48,6 @@ print(x)
 print("y:")
 print(y)
 
-
-
 m,n=np.shape(x)
 m_y=np.shape(y)
 print("x shape:",str(m),",",str(n))
