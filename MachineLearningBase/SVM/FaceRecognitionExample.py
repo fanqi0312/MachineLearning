@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
 #########################################################
 
 # 下载名人数据库（联网下载）.保存在：C:\Users\FAN\scikit_learn_data\lfw_home
-lfw_people = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
+lfw_people = fetch_lfw_people(min_faces_per_person=100, resize=0.4)
 
 # 有多少个实例
 n_samples, h, w = lfw_people.images.shape
@@ -58,7 +58,7 @@ print("done in %0.3fs" % (time() - t0))
 # 从人脸照片提取特征值
 eigenfaces = pca.components_.reshape((n_components, h, w))
 
-print("ffff")
+
 t0 = time()
 # 转化降维数据
 x_train_pca = pca.transform(x_train)

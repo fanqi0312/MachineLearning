@@ -13,7 +13,7 @@ from sklearn import svm
 np.random.seed(100)
 # 正太分布产生。20点，2列，均值2，方差2.
 X=np.r_[np.random.randn(20,2)-[2,2],np.random.randn(20,2)+[2,2]]
-# 前是0，后是1
+# 前20个是0，后20个是1
 Y=[0]*20+[1]*20
 
 # 2.建立模型
