@@ -17,10 +17,12 @@ from sklearn.svm import SVC
 # print(__doc__)
 # 日志格式
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
-#########################################################
 
-# 下载名人数据库（联网下载）.保存在：C:\Users\FAN\scikit_learn_data\lfw_home
-lfw_people = fetch_lfw_people(min_faces_per_person=100, resize=0.4)
+
+############################ 获取数据 #############################
+
+# 下载名人数据库（联网下载）.保存在：C:\Users\FAN\scikit_learn_data\lfw_home 人脸最小张数
+lfw_people = fetch_lfw_people(min_faces_per_person=10, resize=0.4)
 
 # 有多少个实例
 n_samples, h, w = lfw_people.images.shape
@@ -39,13 +41,13 @@ n_classes = target_names.shape[0]
 print("Total dataset size:")
 print("n_samples:%d" % n_samples)
 print("n_features: %d" % n_features)
-print("n_classes: %d" % n_classes)
+print("人数n_classes: %d" % n_classes)
 
-#########################################################
+############################ 分割训练集和测试集 #############################
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.25)
 
-#########################################################
+############################ 转化数据 #############################
 # 组成元素
 n_components = 150
 
@@ -53,7 +55,7 @@ print("Extracting the top %d eigenfaces from %d faces" % (n_components, x_train.
 t0 = time()
 # 数据降维
 pca = RandomizedPCA(n_components=n_components, whiten=True).fit(x_train)
-print("done in %0.3fs" % (time() - t0))
+print("降维用时：done in %0.3fs" % (time() - t0))
 
 # 从人脸照片提取特征值
 eigenfaces = pca.components_.reshape((n_components, h, w))
@@ -63,11 +65,11 @@ t0 = time()
 # 转化降维数据
 x_train_pca = pca.transform(x_train)
 x_test_pca = pca.transform(x_test)
-print("done in %0.3fs" % (time() - t0))
+print("转化降维数据用时：done in %0.3fs" % (time() - t0))
 
-#########################################################
+########################### 建模 ##############################
 
-print("Fitting the classifier to the training set")
+print("分类器与训练集的拟合Fitting the classifier to the training set")
 t0 = time()
 # C惩罚权重，gamma核函数
 param_grid = {'C': [1e3, 5e3, 1e4, 5e4, 1e5],
@@ -78,14 +80,14 @@ clf = GridSearchCV(SVC(kernel='rbf', class_weight='auto'), param_grid)
 clf = clf.fit(x_train_pca, y_train)
 
 print("建模时间 %0.3fs" % (time() - t0))
-print("Best estimator found by grid search:")
+print("网格搜索的最佳估计量Best estimator found by grid search:")
 print(clf.best_estimator_)
 
 ######################## 评估准确率 #################################
-print("Predicting people's names on the test set")
+print("在测试集上预测人名Predicting people's names on the test set")
 t0 = time()
 y_pred = clf.predict(x_test_pca)
-print("clf.predict in %0.3fs" % (time() - t0))
+print("预测用时：clf.predict in %0.3fs" % (time() - t0))
 
 print(classification_report(y_test, y_pred, target_names=target_names))
 print(confusion_matrix(y_test, y_pred, labels=range(n_classes)))
