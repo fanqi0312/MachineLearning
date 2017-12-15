@@ -27,7 +27,7 @@ def loadDataset(filename,split,trainset=[],testset=[]):
                 testset.append(dataset[x])
 
 
-# 计算两个实例的距离（支持多维度）
+# 计算两个实例的距离（支持多维度）参数：点1，点2，维度
 def enclideanDistance(instance1,instance2,length):
     distance=0
     for x in range(length):
@@ -75,18 +75,25 @@ def getAccuracy(testSet,prediction):
 def main():
     trainSet=[]
     testSet=[]
-    # 2/3作为训练集，1/3为测试集
-    split=0.77
+    # 数据分割比例：2/3作为训练集，1/3为测试集
+    split=0.7
+    # 加载数据，并分割
     loadDataset(r'iris.data.txt', split, trainSet, testSet)
-    print('Train set:'+repr(len(trainSet)))
-    print('Test set:'+repr(len(testSet)))
+    print('训练集Train set:'+repr(len(trainSet)))
+    print('测试集Test set:'+repr(len(testSet)))
+
+
     prediction=[]
+    # 临近数量
     k=3
     for x in range(len(testSet)):
+        # 获取最近的3个点
         neighbors=getNeighbors(trainSet, testSet[x], k)
+        # 根据临近点确定类型
         result=getResponse(neighbors)
         prediction.append(result)
+    # 计算准确度
     accuracy=getAccuracy(testSet, prediction)
-    print('Accuracy:'+repr(accuracy))
+    print('准确率Accuracy:'+repr(accuracy) + '%')
 
 main()
