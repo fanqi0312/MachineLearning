@@ -1,7 +1,8 @@
 '''
-Created on 20170424
+kNN算法
+算法：自己实现
+数据集：文本格式，KnnImplementation.data.txt（注意命名规范）
 
-@author: mao
 '''
 import csv
 import random
@@ -31,7 +32,7 @@ def loadDataset(filename,split,trainset=[],testset=[]):
 def enclideanDistance(instance1,instance2,length):
     distance=0
     for x in range(length):
-        # 分别计算每个维度
+        # 分别计算每个维度  更好（A-B）2
         distance+=pow((instance1[x]-instance2[x]), 2)
     return math.sqrt(distance)
 
@@ -78,7 +79,7 @@ def main():
     # 数据分割比例：2/3作为训练集，1/3为测试集
     split=0.7
     # 加载数据，并分割
-    loadDataset(r'iris.data.txt', split, trainSet, testSet)
+    loadDataset(r'KnnImplementation.data.txt', split, trainSet, testSet)
     print('训练集Train set:'+repr(len(trainSet)))
     print('测试集Test set:'+repr(len(testSet)))
 
