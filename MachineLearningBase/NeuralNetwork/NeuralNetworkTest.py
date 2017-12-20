@@ -1,3 +1,7 @@
+'''
+神经网络实例
+
+'''
 from NeuralNetwork import NeuralNetwork
 import numpy as np
 
