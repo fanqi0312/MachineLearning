@@ -1,57 +1,44 @@
-# 数值计算库，存储和处理大型矩阵
+"""
+神经网络
+
+"""
 import numpy as np
 
-# tan函数
-def tanh(x):
-    return np.tanh(x)
-
-# tan函数倒数
-def tanh_deriv(x):
-    return 1.0 - np.tanh(x) * np.tanh(x)
-
-# 逻辑函数
-def logistic(x):
-    return 1 / (1 + np.exp(-x))
-
-# 逻辑函数倒数
-def logistic_derivative(x):
-    return logistic(x) * (1 - logistic(x))
 
 # 神经网络类
 class NeuralNetwork:
-    # 构造函数（层数个数，模式）
+    """
+    :param layers: 数列，包含每层神经元的数量，如[2, 2, 1]
+    :param 激活函数: 可使用"logistic" or "tanh"（默认）
+    """
     def __init__(self, layers, activation='tanh'):
-        """  
-        :param layers: A list containing the number of units in each layer.
-        Should be at least two values
-
-        :param activation: The activation function to be used. Can be
-        "logistic" or "tanh"  （默认）
-        """
-        # 初始化-使用双曲函数或逻辑函数计算
-        if activation == 'logistic':
-            self.activation = logistic
-            self.activation_deriv = logistic_derivative
-        elif activation == 'tanh':
-            self.activation = tanh
-            self.activation_deriv = tanh_deriv
 
         # 初始化-随机设置权重
         self.weights = []
         for i in range(1, len(layers) - 1):
             self.weights.append((2 * np.random.random((layers[i - 1] + 1, layers[i] + 1)) - 1) * 0.25)
             self.weights.append((2 * np.random.random((layers[i] + 1, layers[i + 1])) - 1) * 0.25)
+
+
+        # 初始化激活函数-使用双曲函数或逻辑函数
+        if activation == 'logistic':
+            self.activation = logistic
+            self.activation_deriv = logistic_derivative
+        elif activation == 'tanh':
+            self.activation = tanh
+            self.activation_deriv = tanh_deriv
     """ 
-    X   训练集
-    y   分类标记
-    learning_rate   学习率
-    epochs  抽样计算10000次
+    训练神经网络
+    :param X   训练集
+    :param y   分类标记
+    :param learning_rate   学习率
+    :param epochs  抽样计算10000次
     """
-    def fit(self, X, y, learning_rate=0.2, epochs=10000):
+    def fit(self, X, y, learning_rate=0.2, epochs=20000):
         ############# 处理X
         # 确认是二维
         X = np.atleast_2d(X)
-        # 1矩阵（行数，列数+1）
+        # 生成1.0的2维矩阵（行数，列数（行数+1））
         temp = np.ones([X.shape[0], X.shape[1] + 1])
         # 第一列和除最后一列
         temp[:, 0:-1] = X  # adding the bias unit to the input layer
@@ -59,7 +46,7 @@ class NeuralNetwork:
         # 转化标准array
         y = np.array(y)
 
-        ############# 更新神经网络（核心）
+        ############# 训练神经网络（核心）
         for k in range(epochs):
             # 从0-10随机取数
             i = np.random.randint(X.shape[0])
@@ -71,6 +58,7 @@ class NeuralNetwork:
                 a.append(self.activation(np.dot(a[l], self.weights[l])))
             # 误差值
             error = y[i] - a[-1]  # Computer the error at the top layer
+
             # 反向更新
             # For output layer, Err calculation (delta is updated error)
             deltas = [error * self.activation_deriv(a[-1])]
@@ -94,3 +82,19 @@ class NeuralNetwork:
         for l in range(0, len(self.weights)):
             a = self.activation(np.dot(a, self.weights[l]))
         return a
+
+# tanh函数
+def tanh(x):
+    return np.tanh(x)
+
+# tan函数倒数
+def tanh_deriv(x):
+    return 1.0 - np.tanh(x) * np.tanh(x)
+
+# 逻辑函数
+def logistic(x):
+    return 1 / (1 + np.exp(-x))
+
+# 逻辑函数导数
+def logistic_derivative(x):
+    return logistic(x) * (1 - logistic(x))

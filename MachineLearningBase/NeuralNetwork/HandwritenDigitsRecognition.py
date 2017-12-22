@@ -15,8 +15,12 @@ y = digits.target
 # 神经网络要求
 X -= X.min()  # normalize the values to bring them into the range 0-1
 X /= X.max()
-# 如何设置输入输出，输入跟特征向量相同（8X8），输出层是类别结果：数字有0-9共10个，隐藏层灵活通常比输入层多
+
+# 输入层：跟特征向量相同（8X8），
+# 隐藏层：灵活通常比输入层多
+# 输出层：类别结果：数字有0-9共10个，
 nn = NeuralNetwork([64, 100, 10], 'logistic')
+
 # 交叉训练
 X_train, X_test, y_train, y_test = train_test_split(X, y)
 # 转化数据类型
@@ -24,7 +28,7 @@ labels_train = LabelBinarizer().fit_transform(y_train)
 labels_test = LabelBinarizer().fit_transform(y_test)
 
 print("start fitting")
-nn.fit(X_train, labels_train, epochs=3000)
+nn.fit(X_train, labels_train, epochs=8000)
 predictions = []
 for i in range(X_test.shape[0]):
     o = nn.predict(X_test[i])
