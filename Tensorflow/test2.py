@@ -2,6 +2,9 @@ import tensorflow as tf
 
 #################张量
 #tf.constant是一个计算，结果为一个张量，保存在a中
+
+name = "1"
+
 a = tf.constant([1.0, 2.0], name="a1")
 # a = tf.constant([1, 2], name="a1") #如果是1,0，则会报类型错误
 # a = tf.constant([1, 2], name="a1", dtype=tf.float32) #指定类型则不会报错
