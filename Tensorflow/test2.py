@@ -20,7 +20,7 @@ print(result2)   #Tensor("add :0", shape=(2,), dtype=float32)
 
 
 #################会话
-
+"""
 #1
 #创建一个会话
 sess = tf.Session()
@@ -34,7 +34,7 @@ sess.close()
 with tf.Session() as sess:
     sess.run(...) #计算内容放在with中
 #不需要关闭
-
+"""
 
 
 
