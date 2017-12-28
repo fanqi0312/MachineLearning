@@ -59,7 +59,7 @@ class NeuralNetworkNew:
             X0 = X.shape[0]
             i = np.random.randint(X0)
             Xi = X[i]
-            a = [Xi] #实例
+            a = [Xi]  # 实例
 
             #
             lenWeights = len(self.weights)
@@ -72,22 +72,33 @@ class NeuralNetworkNew:
                 a.append(activationDot)
 
             # 误差值
-            error = y[i] - a[-1]  # Computer the error at the top layer
+            yi = y[i]  # 正确值
+            a_1 = a[-1]
+            error = yi - a_1  # Computer the error at the top layer
 
             # 反向更新
             # For output layer, Err calculation (delta is updated error)
-            a_1 = a[-1]
+            a_1 = a_1
             activationa1 = self.activation_deriv(a_1)
+            # 更新后的值
             deltas = [error * activationa1]
 
             # Staring backprobagation
-            for l in range(len(a) - 2, 0, -1):  # we need to begin at the second to last layer
+            lena = len(a)
+            for l in range(lena - 2, 0, -1):  # we need to begin at the second to last layer
                 # Compute the updated error (i,e, deltas) for each node going from top layer to input layer
-                deltas.append(deltas[-1].dot(self.weights[l].T) * self.activation_deriv(a[l]))
+                weightsl = self.weights[l]
+                wlt = weightsl.T
+                deltasDot = deltas[-1].dot(wlt)
+                al = a[l]
+                activationDeriv = self.activation_deriv(al)
+                deltas.append(deltasDot * activationDeriv)
+            # 颠倒数组
             deltas.reverse()
             for i in range(len(self.weights)):
                 layer = np.atleast_2d(a[i])
                 delta = np.atleast_2d(deltas[i])
+                # 更新weight
                 self.weights[i] += learning_rate * layer.T.dot(delta)
 
     # 测试（与正向相似）
@@ -121,7 +132,7 @@ def logistic_derivative(x):
     return logistic(x) * (1 - logistic(x))
 
 
-nn = NeuralNetworkNew([2, 2, 1], 'tanh')
+nn = NeuralNetworkNew([2, 1, 1], 'tanh')
 
 # 训练集
 X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])

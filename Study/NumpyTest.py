@@ -41,14 +41,12 @@ print(randintN)
 randintN = np.random.randint(a)
 print(randintN)
 
-
-
 print("================dot矩阵乘法")
 # 维度相同，分别相乘求和
-a = [1, 2, 3]
-b = [1, 2, 3]
-npDot = np.dot(a, b)
+a = [1, 2]
+b = [2, 3]
+c = [[1, 2], [2, 2]]
+npDot = np.dot(a, b)  # 相乘后求和
 print(npDot)
-
-
-
+npDot = np.dot(b, c)  #
+print(npDot)
