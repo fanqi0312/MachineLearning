@@ -110,7 +110,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_predict, "float"))
 sess.run(tf.initialize_all_variables())
 
 # 开始训练模型，循环20000次，每次随机从训练集中抓取50幅图像
-for i in range(200):
+for i in range(1000):
     batch = mnist.train.next_batch(50)
     if i % 100 == 0:
         # 每100次输出一次日志
