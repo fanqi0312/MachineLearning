@@ -1,40 +1,37 @@
+"""
+Python 基础语法
+
+"""
+
+
+print("================================字符串")
 print('hello, world')
 # hello, world
 
-print(100 + 200)
-# 300
-
-print('100 + 200 =', 100 + 200)
-# 100 + 200 = 300
+# 以单引号'或双引号",可以用转义字符\来标识
+print('I\'m \"OK\"!')
+# I'm "OK"!
 
 # 用逗号“,”隔开，会依次打印每个字符串，遇到逗号“,”会输出一个空格
 print('The quick brown fox', 'jumps over', 'the lazy dog')
 # The quick brown fox jumps over the lazy dog
 
 
-# input(),可以让用户输入字符串，并存放到一个变量里。
-# name = input('please enter your name: ')
-# print('hello,', name)
-# please enter your name: fanqi
-# hello, fanqi
+print("================================数值")
+print(100 + 200)
+# 300
 
-# :结尾时，缩进的语句视为代码块。
-a = 100
-if a >= 0:
-    print(a)
-else:
-    print(-a)
+print('100 + 200 =', 100 + 200)
+# 100 + 200 = 300
 
 # 整数
 # 按照科学记数法:1.23x109就是1.23e9
 a = 1.23e9
 
-# 字符串
-# 以单引号'或双引号",可以用转义字符\来标识
-print('I\'m \"OK\"!')
-# I'm "OK"!
 
-# 布尔值
+
+
+print("================================布尔值")
 # 只有True、False两种值,注意大小写
 print(3 > 2)
 # True
@@ -50,7 +47,37 @@ print(not True)
 # False
 
 
-### list集合 ###
+print("================================if判断")
+# :结尾时，缩进的语句视为代码块。
+a = 100
+if a >= 0:
+    print(a)
+else:
+    print(-a)
+
+# Python的缩进规则，如果if语句判断是True，就把缩进的两行print语句执行了，否则，什么也不做。
+age = 20
+if age >= 18:
+    print('your age is', age)
+    print('adult')
+elif age >= 6:
+    print('teenager')
+else:
+    print('your age is', age)
+    print('teenager')
+
+
+print("================================for循环")
+names = ['Michael', 'Bob', 'Tracy']
+for name in names:
+    print(name)
+
+d = {'a': 1, 'b': 2, 'c': 3}
+for key in d:
+    print(key,d[key])
+
+
+print("================================list集合")
 classmates = ['Michael', 'Bob', 'Tracy']
 print(['Michael', 'Bob', 'Tracy'])
 # ['Michael', 'Bob', 'Tracy']
@@ -118,36 +145,16 @@ s = ['python', 'java', ['asp', 'php'], 'scheme']
 len(s)  # 4
 s[2][1]  # php
 
-### tuple ###
+
+print("================================tuple集合")
 # tuple和list非常类似，但是tuple一旦初始化就不能修改。没有append()，insert()这样的方法
 classmates = ('Michael', 'Bob', 'Tracy')
 # 一个元素时，要加,号。避免(1)的歧义。
 t = (1,)
 
-### 条件判断 ###
-# Python的缩进规则，如果if语句判断是True，就把缩进的两行print语句执行了，否则，什么也不做。
-age = 20
-if age >= 18:
-    print('your age is', age)
-    print('adult')
-elif age >= 6:
-    print('teenager')
-else:
-    print('your age is', age)
-    print('teenager')
 
-### 循环 ###
-names = ['Michael', 'Bob', 'Tracy']
-for name in names:
-    print(name)
-
-d = {'a': 1, 'b': 2, 'c': 3}
-for key in d:
-    print(key,d[key])
-
-
-
-# dict 语言中也称为map，使用键-值（key-value）存储
+print("================================dict集合（Map）")
+# 使用键-值（key-value）存储
 d = {'Michael': 95, 'Bob': 75, 'Tracy': 85}
 d['Michael']
 # 95
@@ -155,16 +162,17 @@ d['Michael']
 # 更新值
 d['Michael'] = 99
 
+
+print("================================set集合")
 # set 是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。
 s = set([1, 2, 3])
 # 删除指定元素
 s.remove(2)
 
 
-
-### 函数
-# 绝对值
-abs(-10)
-# 10
-
-
+print("================================input()")
+# input(),可以让用户输入字符串，并存放到一个变量里。
+# name = input('please enter your name: ')
+# print('hello,', name)
+# please enter your name: fanqi
+# hello, fanqi
