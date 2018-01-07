@@ -46,8 +46,7 @@ for step in range(201):
 import tensorflow as tf
 
 matrixl = tf.constant([[3, 3]])
-matrix2 = tf.constant([[2],
-                       [2]])
+matrix2 = tf.constant([[2],[2]])
 
 # 矩阵乘法
 product = tf.matmul(matrixl, matrix2)
