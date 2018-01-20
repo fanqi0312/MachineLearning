@@ -11,14 +11,15 @@ mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
 # NETWORK TOPOLOGIES
 # 网络结构：3层。（784-256-128-10）
+n_input = 784
 n_hidden_1 = 256
 n_hidden_2 = 128
-n_input = 784
 n_classes = 10
 
 # INPUTS AND OUTPUTS
 x = tf.placeholder("float", [None, n_input])
 y = tf.placeholder("float", [None, n_classes])
+
 
 # NETWORK PARAMETERS
 # 高斯初始化参数

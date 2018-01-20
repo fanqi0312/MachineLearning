@@ -18,7 +18,7 @@ print("MNIST ready")
 n_input = 784
 n_output = 10
 weights = {
-    # 卷基层参数说明（4个）：H W 深度 特征值
+    # 卷基层参数说明（4个）：H W 输入深度、输出特征图数。 方差项
     'wc1': tf.Variable(tf.random_normal([3, 3, 1, 64], stddev=0.1)),
     # 卷基层）：64是上一层的特征值
     'wc2': tf.Variable(tf.random_normal([3, 3, 64, 128], stddev=0.1)),
@@ -36,25 +36,42 @@ biases = {
 
 def conv_basic(_input, _w, _b, _keepratio):
     # INPUT
+    # # INPUT 要求是4维的，1.batch的大小，（-1自动计算，其他都确定的情况下，原数据乘积和，/28/28/1。）。2.H，3.W， 4.深度
     _input_r = tf.reshape(_input, shape=[-1, 28, 28, 1])
     # CONV LAYER 1
+    # nn模块是cnn、rnn常用
+    # 参数：
+    # input
+    # W
+    # strides：要求4维。1. batchsize大小， 2. H上的大小， 3. W的大小， 4，
+    # padding：SAME（自动填充零）（常用）、VALID（不填充，放弃）
     _conv1 = tf.nn.conv2d(_input_r, _w['wc1'], strides=[1, 1, 1, 1], padding='SAME')
     # _mean, _var = tf.nn.moments(_conv1, [0, 1, 2])
     # _conv1 = tf.nn.batch_normalization(_conv1, _mean, _var, 0, 1, 0.0001)
+    # 激活函数
     _conv1 = tf.nn.relu(tf.nn.bias_add(_conv1, _b['bc1']))
+    # ksize：通常1， H2，W2，1
     _pool1 = tf.nn.max_pool(_conv1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
+    # dropout随机：  保留比例：0.6
     _pool_dr1 = tf.nn.dropout(_pool1, _keepratio)
-    # CONV LAYER 2
+
+
+    ######## CONV LAYER 2
     _conv2 = tf.nn.conv2d(_pool_dr1, _w['wc2'], strides=[1, 1, 1, 1], padding='SAME')
     # _mean, _var = tf.nn.moments(_conv2, [0, 1, 2])
     # _conv2 = tf.nn.batch_normalization(_conv2, _mean, _var, 0, 1, 0.0001)
     _conv2 = tf.nn.relu(tf.nn.bias_add(_conv2, _b['bc2']))
     _pool2 = tf.nn.max_pool(_conv2, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
     _pool_dr2 = tf.nn.dropout(_pool2, _keepratio)
+
+
     # VECTORIZE
+    # 将输出转为向量的形式， 技巧get_shape()
     _dense1 = tf.reshape(_pool_dr2, [-1, _w['wd1'].get_shape().as_list()[0]])
+
     # FULLY CONNECTED LAYER 1
     _fc1 = tf.nn.relu(tf.add(tf.matmul(_dense1, _w['wd1']), _b['bd1']))
+    #
     _fc_dr1 = tf.nn.dropout(_fc1, _keepratio)
     # FULLY CONNECTED LAYER 2
     _out = tf.add(tf.matmul(_fc_dr1, _w['wd2']), _b['bd2'])
@@ -78,7 +95,7 @@ sess.run(init)
 
 
 # print (help(tf.nn.conv2d))
-print(help(tf.nn.max_pool))
+# print(help(tf.nn.max_pool))
 
 x = tf.placeholder(tf.float32, [None, n_input])
 y = tf.placeholder(tf.float32, [None, n_output])
@@ -102,7 +119,7 @@ saver = tf.train.Saver(max_to_keep=2)
 print("GRAPH READY")
 
 # 是否训练测试，1为训练，0为测试
-do_train = 0
+do_train = 1
 
 
 sess = tf.Session()
@@ -115,6 +132,7 @@ if do_train == 1 :
     for epoch in range(training_epochs):
         avg_cost = 0.
         # total_batch = int(mnist.train.num_examples/batch_size)
+
         total_batch = 10
         # Loop over all batches
         for i in range(total_batch):

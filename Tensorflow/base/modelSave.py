@@ -28,12 +28,12 @@ with tf.Session() as sess:
         print ("V1:",sess.run(v1))
         print ("V2:",sess.run(v2))
         # 4. 保存模型
-        saver_path = saver.save(sess, "save/modelSave.ckpt")
+        saver_path = saver.save(sess, "model/modelSave.ckpt")
         print ("Model saved in file: ", saver_path)
 
     if do_train == 0:
         # 5. 加载模型
-        saver.restore(sess, "save/modelSave.ckpt")
+        saver.restore(sess, "model/modelSave.ckpt")
 
         # 6. 测试模型
         print ("V1:",sess.run(v1))
