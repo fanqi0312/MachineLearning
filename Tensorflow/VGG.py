@@ -3,32 +3,42 @@
 1. 获得模型文件，并放到文件夹下
 
 """
-import scipy.io
-import numpy as np
 import os
-import scipy.misc
+
 import matplotlib.pyplot as plt
+import numpy as np
+import scipy.io
+import scipy.misc
 import tensorflow as tf
 
 
 def _conv_layer(input, weights, bias):
-    conv = tf.nn.conv2d(input, tf.constant(weights), strides=(1, 1, 1, 1),
-            padding='SAME')
+    conv = tf.nn.conv2d(input, tf.constant(weights), strides=(1, 1, 1, 1), padding='SAME')
     return tf.nn.bias_add(conv, bias)
+
+
 def _pool_layer(input):
-    return tf.nn.max_pool(input, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1),
-            padding='SAME')
+    return tf.nn.max_pool(input, ksize=(1, 2, 2, 1), strides=(1, 2, 2, 1), padding='SAME')
+
+
 def preprocess(image, mean_pixel):
     return image - mean_pixel
+
+
 def unprocess(image, mean_pixel):
     return image + mean_pixel
+
+
 def imread(path):
     return scipy.misc.imread(path).astype(np.float)
+
+
 def imsave(path, img):
     img = np.clip(img, 0, 255).astype(np.uint8)
     scipy.misc.imsave(path, img)
-print ("Functions for VGG ready")
 
+
+print("Functions for VGG ready")
 
 
 def net(data_path, input_image):
@@ -76,7 +86,9 @@ def net(data_path, input_image):
         net[name] = current
     assert len(net) == len(layers)
     return net, mean_pixel, layers
-print ("Network for VGG ready")
+
+
+print("Network for VGG ready")
 
 # 模型地址
 
@@ -84,7 +96,6 @@ print ("Network for VGG ready")
 cwd = os.getcwd()
 VGG_PATH = cwd + "\\model\\imagenet-vgg-verydeep-19.mat"
 IMG_PATH = cwd + "\\model\\dog.jpg"
-
 
 input_image = imread(IMG_PATH)
 shape = (1, input_image.shape[0], input_image.shape[1], input_image.shape[2])
