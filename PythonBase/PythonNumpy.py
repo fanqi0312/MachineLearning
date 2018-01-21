@@ -5,12 +5,12 @@ Numpy 库用法
 
 import numpy as np
 
-print("================================技巧")
+print("================================ 技巧")
 # 打印帮助文档，也可直接点击
 # Ctrl右侧显示代码
 # print(help(np.genfromtxt))
 
-print("================================genfromtxt打开数据")
+print("================================ genfromtxt打开数据")
 # 参数:
 # 文件路径:
 # delimiter:分割符号
@@ -30,7 +30,7 @@ print(uruguay_other_1986)  # 获取第2行，第5列的0.5
 third_country = world_alcohol[2, 2]
 print(third_country)  # 获取第3行，第3列的Cte d'Ivoire
 
-print("================================array数组")
+print("================================ array数组")
 # The np.array() function can take a list or list of lists as input. When we input a list, we get a one-dimensional array as a result:
 vector = np.array([5, 10, 15, 20])
 print(vector)
@@ -39,7 +39,7 @@ print(vector)
 matrix = np.array([[5, 10, 15], [20, 25, 30], [35, 40, 45]])
 print(matrix)
 
-print("================================shape矩阵维度")
+print("================================ shape矩阵维度")
 c = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 print(c.shape)
 # (4, 2)
@@ -55,7 +55,7 @@ print(vector.shape)  # (4,)
 matrix = np.array([[5, 10, 15], [20, 25, 30]])
 print(matrix.shape)  # (2, 3)
 
-print("================================array数组")
+print("================================ array数组")
 # 数据格式必须相同
 # Each value in a NumPy array has to have the same data type
 # NumPy will automatically figure out an appropriate data type when reading in data or converting lists to arrays.
@@ -72,7 +72,7 @@ numbers = np.array([1, 2, 3, "4"])
 print(numbers.dtype)  # <U11
 print(numbers)  # ['1' '2' '3' '4']
 
-print("================================切片")
+print("================================ 切片")
 vector = np.array([5, 10, 15, 20])
 print(vector[0:3])  # 前3个（不含第4个），[ 5 10 15]
 
@@ -103,7 +103,7 @@ print(matrix[1:3, 0:2])  # 1、2行，0、1列
 #  [35 40]]
 
 
-print("================================数组判断和取值")
+print("================================ 数组判断和取值")
 # it will compare the second value to each element in the vector
 # If the values are equal, the Python interpreter returns True; otherwise, it returns False
 # 对数组每个元素判断
@@ -130,7 +130,7 @@ print(second_column_25)  # [False  True False]
 # 取出所有行数据
 print(matrix[second_column_25, :])  # [[20 25 30]]
 
-print("================================数组与或判断")
+print("================================ 数组与或判断")
 
 # We can also perform comparisons with multiple conditions
 vector = np.array([5, 10, 15, 20])
@@ -161,7 +161,7 @@ print(matrix)
 #  [35 40 45]]
 
 
-print("================================类型转换")
+print("================================ 类型转换")
 # We can convert the data type of an array with the ndarray.astype() method.
 vector = np.array(["1", "2", "3"])
 print(vector.dtype)  # <U1
@@ -171,13 +171,13 @@ vector = vector.astype(float)
 print(vector.dtype)  # float64
 print(vector)  # [ 1.  2.  3.]
 
-print("================================极值")
+print("================================ 极值")
 vector = np.array([5, 10, 15, 20])
 print(vector.min()) #最小值 5
 print(vector.max()) #最大值 20
 
 
-print("================================求和")
+print("================================ 求和")
 vector = np.array([5, 10, 15, 20])
 print(vector.sum()) #50
 
@@ -195,7 +195,7 @@ print(matrix.sum(axis=0)) #[110 130 150]
 print(matrix.sum(axis=1)) #[ 30  75 120 165]
 
 
-print("================================构造矩阵")
+print("================================ 构造矩阵")
 # 随机矩阵
 np.random.random((2, 3))
 
@@ -244,7 +244,7 @@ a = np.sin(np.linspace(0, 2 * pi, 100))
 
 a = np.floor(10 * np.random.random((2, 2)))
 b = np.floor(10 * np.random.random((2, 2)))
-print("================================计算")
+print("================================ 计算")
 # the product operator * operates elementwise in NumPy arrays
 a = np.array([20, 30, 40, 50]) #[20 30 40 50]
 b = np.arange(4) #[0 1 2 3]
@@ -279,7 +279,7 @@ print(A.dot(B))
 #  [3 4]]
 print(np.dot(A, B)) # 效果相同
 
-print("================================运算符")
+print("================================ 运算符")
 B = np.array([0, 1, 2])
 # e为底的指数函数
 print(np.exp(B)) #[ 1. 2.71828183 7.3890561 ]
@@ -306,7 +306,7 @@ print(a.resize((2, 6)))
 #  [  0.   0.   0.   0.   0.   0.]]
 
 
-print("================================拼接与分割")
+print("================================ 拼接与分割")
 a = np.array([[1, 2],
               [5, 6]])
 b = np.array([[3, 4],
@@ -342,7 +342,7 @@ print(np.vsplit(c, 2))
 
 
 
-print("================================复制")
+print("================================ 复制")
 # Simple assignments make no copy of array objects or of their data.
 a = np.arange(12)
 # 1. 地址复制。ab指向相同地址，会同时修改
@@ -371,7 +371,7 @@ d[0, 0] = 9999
 print(d)
 print(a)
 
-print("================================argmax最大值，tile行列复制")
+print("================================ argmax最大值，tile行列复制")
 data = np.sin(np.arange(20)).reshape(5, 4)
 print(data)
 # 获取最大值的索引
@@ -417,7 +417,7 @@ world_alcohol
 
 
 
-print("================================过期")
+print("================================ 过期")
 
 # replace nan value with 0
 world_alcohol = np.genfromtxt("data/world_alcohol.txt", delimiter=",")

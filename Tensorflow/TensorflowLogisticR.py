@@ -62,13 +62,13 @@ arr = np.array([[31, 23, 4, 24, 27, 34],
                 [16, 1, 26, 32, 2, 29],
                 [17, 12, 5, 11, 10, 15]])
 
-# tf.rank(arr).eval()
-# tf.shape(arr).eval()
-# tf.argmax(arr, 0).eval()
+# tf.rank(arr).eval() 矩阵的维度，打印需要eval()
+# tf.shape(arr).eval() 行列数
+# tf.argmax(arr, 0).eval() 列上最大值的索引
 # 0 -> 31 (arr[0, 0])
 # 3 -> 30 (arr[3, 1])
 # 2 -> 33 (arr[2, 2])
-tf.argmax(arr, 1).eval()
+tf.argmax(arr, 1).eval() #行、上最大值的索引
 # 5 -> 34 (arr[0, 5])
 # 5 -> 35 (arr[1, 5])
 # 2 -> 33 (arr[2, 2])
@@ -83,14 +83,13 @@ sess.run(init)
 # MINI-BATCH LEARNING
 for epoch in range(training_epochs):
     avg_cost = 0.
-    num_batch = int(mnist.train.num_examples / batch_size)
-    for i in range(num_batch):
+    total_batch = int(mnist.train.num_examples / batch_size)
+    for i in range(total_batch):
         batch_xs, batch_ys = mnist.train.next_batch(batch_size)
-        # 梯度下降求解
-        sess.run(optm, feed_dict={x: batch_xs, y: batch_ys})
-
         feeds = {x: batch_xs, y: batch_ys}
-        avg_cost += sess.run(cost, feed_dict=feeds) / num_batch
+        # 梯度下降求解
+        sess.run(optm, feed_dict=feeds)
+        avg_cost += sess.run(cost, feed_dict=feeds) / total_batch
     # DISPLAY
     if epoch % display_step == 0:
         feeds_train = {x: batch_xs, y: batch_ys}
@@ -100,3 +99,6 @@ for epoch in range(training_epochs):
         print("Epoch: %03d/%03d cost: %.9f train_acc: %.3f test_acc: %.3f"
               % (epoch, training_epochs, avg_cost, train_acc, test_acc))
 print("DONE")
+
+
+

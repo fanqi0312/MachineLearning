@@ -7,7 +7,7 @@ print(food_info.dtypes) # String 为object
 # Shrt_Desc           object
 # Water_(g)          float64
 
-print("================================显示数据")
+print("================================ 显示数据")
 first_rows = food_info.head()
 # 默认显示前5条
 print(food_info.head())
@@ -21,7 +21,7 @@ print(food_info.columns)
 print(food_info.shape)
 
 
-print("================================取值")
+print("================================ 取值")
 #pandas uses zero-indexing
 #Series object representing the row at index 0.
 # 取数据
@@ -43,7 +43,7 @@ print(food_info.loc[0])
 #print(food_info.dtypes)
 
 
-print("================================切片")
+print("================================ 切片")
 # Returns a DataFrame containing the rows at indexes 3, 4, 5, and 6.
 food_info.loc[3:6]
 
@@ -88,7 +88,7 @@ gram_df = food_info[gram_columns]
 print(gram_df.head(3))
 
 
-print("================================切片")
+print("================================ 切片")
 
 #print food_info["Iron_(mg)"]
 #div_1000 = food_info["Iron_(mg)"] / 1000
@@ -103,7 +103,7 @@ print("================================切片")
 #mult_2 = food_info["Iron_(mg)"]*2
 
 
-print("================================计算")
+print("================================ 计算")
 # 单位转换
 #It applies the arithmetic operator to the first value in both columns, the second value in both columns, and so on
 water_energy = food_info["Water_(g)"] * food_info["Energ_Kcal"]

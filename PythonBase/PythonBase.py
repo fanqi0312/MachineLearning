@@ -4,7 +4,7 @@ Python 基础语法
 """
 
 
-print("================================字符串")
+print("================================ 字符串")
 print('hello, world')
 # hello, world
 
@@ -17,7 +17,7 @@ print('The quick brown fox', 'jumps over', 'the lazy dog')
 # The quick brown fox jumps over the lazy dog
 
 
-print("================================数值")
+print("================================ 数值")
 print(100 + 200)
 # 300
 
@@ -31,7 +31,7 @@ a = 1.23e9
 
 
 
-print("================================布尔值")
+print("================================ 布尔值")
 # 只有True、False两种值,注意大小写
 print(3 > 2)
 # True
@@ -47,7 +47,7 @@ print(not True)
 # False
 
 
-print("================================if判断")
+print("================================ if判断")
 # :结尾时，缩进的语句视为代码块。
 a = 100
 if a >= 0:
@@ -67,7 +67,7 @@ else:
     print('teenager')
 
 
-print("================================for循环")
+print("================================ for循环")
 names = ['Michael', 'Bob', 'Tracy']
 for name in names:
     print(name)
@@ -77,7 +77,7 @@ for key in d:
     print(key,d[key])
 
 
-print("================================list集合")
+print("================================ list集合")
 classmates = ['Michael', 'Bob', 'Tracy']
 print(['Michael', 'Bob', 'Tracy'])
 # ['Michael', 'Bob', 'Tracy']
@@ -146,14 +146,14 @@ len(s)  # 4
 s[2][1]  # php
 
 
-print("================================tuple集合")
+print("================================ tuple集合")
 # tuple和list非常类似，但是tuple一旦初始化就不能修改。没有append()，insert()这样的方法
 classmates = ('Michael', 'Bob', 'Tracy')
 # 一个元素时，要加,号。避免(1)的歧义。
 t = (1,)
 
 
-print("================================dict集合（Map）")
+print("================================ dict集合（Map）")
 # 使用键-值（key-value）存储
 d = {'Michael': 95, 'Bob': 75, 'Tracy': 85}
 d['Michael']
@@ -163,14 +163,14 @@ d['Michael']
 d['Michael'] = 99
 
 
-print("================================set集合")
+print("================================ set集合")
 # set 是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。
 s = set([1, 2, 3])
 # 删除指定元素
 s.remove(2)
 
 
-print("================================input()")
+print("================================ input()")
 # input(),可以让用户输入字符串，并存放到一个变量里。
 # name = input('please enter your name: ')
 # print('hello,', name)

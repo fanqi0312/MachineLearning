@@ -36,7 +36,7 @@ print(correct_mean_age) #29.6991176471
 
 
 
-print("================================关系")
+print("================================ 关系")
 # 每个仓位的平均价格
 #mean fare for each class
 passenger_classes = [1, 2, 3]
