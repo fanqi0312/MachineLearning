@@ -66,6 +66,14 @@ else:
     print('your age is', age)
     print('teenager')
 
+sex = "women"
+
+if age >= 18 and sex == "women":
+    print('and your ', age, sex)
+if age <= 18 or sex == "women":
+    print('or your ', age, sex)
+
+
 
 print("================================ for循环")
 names = ['Michael', 'Bob', 'Tracy']

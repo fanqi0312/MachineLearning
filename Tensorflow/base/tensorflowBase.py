@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 
 # 展示方法
+print("================================ 1")
 def tfprint(a):
     with tf.Session() as sess:
         result = sess.run(a)
@@ -165,7 +166,7 @@ arr = np.array([[31, 23, 4, 24, 27, 34],
 # 0 -> 31 (arr[0, 0])
 # 3 -> 30 (arr[3, 1])
 # 2 -> 33 (arr[2, 2])
-tf.argmax(arr, 1).eval() #行、上最大值的索引
+# tf.argmax(arr, 1).eval() #行、上最大值的索引
 # 5 -> 34 (arr[0, 5])
 # 5 -> 35 (arr[1, 5])
 # 2 -> 33 (arr[2, 2])

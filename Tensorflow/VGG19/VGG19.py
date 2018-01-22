@@ -1,6 +1,10 @@
 """
-使用训练好的模型-VGG有19层
+使用训练好的模型
+VGG有19层
 1. 获得模型文件，并放到文件夹下
+2. 加载模型文件
+3. net函数
+
 
 """
 import os
@@ -53,13 +57,16 @@ def net(data_path, input_image):
         'conv5_1', 'relu5_1', 'conv5_2', 'relu5_2', 'conv5_3',
         'relu5_3', 'conv5_4', 'relu5_4'
     )
+
     # 加载模型
     data = scipy.io.loadmat(data_path)
-    mean = data['normalization'][0][0][0]
-    # 减均值
-    mean_pixel = np.mean(mean, axis=(0, 1))
-    weights = data['layers'][0]
 
+    # 减均值（原模型减均值）
+    mean = data['normalization'][0][0][0]
+    mean_pixel = np.mean(mean, axis=(0, 1))
+
+    # 获取原模型的参数
+    weights = data['layers'][0]
     # 实验模型的结构，逐层测试（如果不知道结构的话）
     # conv_1 w
     print(weights[0][0][0][0][0][0].shape)
@@ -87,17 +94,17 @@ def net(data_path, input_image):
     assert len(net) == len(layers)
     return net, mean_pixel, layers
 
-
 print("Network for VGG ready")
 
-# 模型地址
+# 2. 加载模型文件
 
-# 绝对路径
+# 当前路径
 cwd = os.getcwd()
 VGG_PATH = cwd + "\\model\\imagenet-vgg-verydeep-19.mat"
-IMG_PATH = cwd + "\\model\\dog.jpg"
 
+IMG_PATH = cwd + "\\model\\dog.jpg"
 input_image = imread(IMG_PATH)
+
 shape = (1, input_image.shape[0], input_image.shape[1], input_image.shape[2])
 with tf.Session() as sess:
     image = tf.placeholder('float', shape=shape)

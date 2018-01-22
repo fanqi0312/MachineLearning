@@ -8,8 +8,8 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.contrib import learn
 
-from Tensorflow.text import data_helpers
-from Tensorflow.text.text_cnn import TextCNN
+from Tensorflow.project.text import data_helpers
+from Tensorflow.project.text.text_cnn import TextCNN
 
 # Parameters
 # ==================================================
