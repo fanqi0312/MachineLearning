@@ -3,6 +3,10 @@ Python 基础语法
 
 """
 
+data_int = 1
+data_float = 0.2
+data_str = "a"
+
 
 print("================================ 字符串")
 print('hello, world')
@@ -15,6 +19,12 @@ print('I\'m \"OK\"!')
 # 用逗号“,”隔开，会依次打印每个字符串，遇到逗号“,”会输出一个空格
 print('The quick brown fox', 'jumps over', 'the lazy dog')
 # The quick brown fox jumps over the lazy dog
+
+# 占位符（数量一致）
+print("整型{},字符{},浮点{}".format(1,"a",0.1))
+
+# 格式化（数量一致）
+print("整型（前3位）：%.3d 浮点（后3）：%.3f 字符串：%s" % (1,1.2,"a"))
 
 
 print("================================ 数值")
@@ -83,6 +93,14 @@ for name in names:
 d = {'a': 1, 'b': 2, 'c': 3}
 for key in d:
     print(key,d[key])
+
+
+for i,key in enumerate(d):
+    print("序号{},索引{},值{}".format(i,key,d[key]))
+
+print("================================ 字典 ???")
+
+a = {'x:1, y:2'}
 
 
 print("================================ list集合")
@@ -176,6 +194,32 @@ print("================================ set集合")
 s = set([1, 2, 3])
 # 删除指定元素
 s.remove(2)
+
+
+print("================================ with")
+# 用于访问资源，确保过程中是否发生异常都会执行释放资源操作，比如访问文件
+
+# 1.with后面的语句被求值后，返回对象的 __enter__() 方法被调用，
+# 2. 这个方法的返回值将被赋值给as后面的变量。
+# 当with后面的代码块全部被执行完之后，将调用前面返回对象的 __exit__()方法。
+
+class Test():
+    def __enter__(self):
+        print("In __enter__() with开始调用")
+        return "test_with 返回给as后变量"
+
+    def __exit__(self, type, value, trace):
+        print("In __exit__() with结束调用")
+
+def get_example():
+    return Test()
+
+with get_example() as example:
+    print("example:", example)
+
+
+
+
 
 
 print("================================ input()")
