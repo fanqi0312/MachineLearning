@@ -173,13 +173,12 @@ print(vector)  # [ 1.  2.  3.]
 
 print("================================ 极值")
 vector = np.array([5, 10, 15, 20])
-print(vector.min()) #最小值 5
-print(vector.max()) #最大值 20
-
+print(vector.min())  # 最小值 5
+print(vector.max())  # 最大值 20
 
 print("================================ 求和")
 vector = np.array([5, 10, 15, 20])
-print(vector.sum()) #50
+print(vector.sum())  # 50
 
 # The axis dictates which dimension we perform the operation on
 # 1 means that we want to perform the operation on each row, and 0 means on each column
@@ -189,20 +188,56 @@ matrix = np.array([
     [35, 40, 45],
     [50, 55, 60]
 ])
-#按列求和
-print(matrix.sum(axis=0)) #[110 130 150]
-#按行求和
-print(matrix.sum(axis=1)) #[ 30  75 120 165]
-
+# 按列求和
+print(matrix.sum(axis=0))  # [110 130 150]
+# 按行求和
+print(matrix.sum(axis=1))  # [ 30  75 120 165]
 
 print("================================ 构造矩阵")
-# 随机矩阵
-np.random.random((2, 3))
+#值为0的矩阵
+np.zeros((3, 4))
 
-# 生成从0-14的数组
+#值为1的矩阵
+np.ones((2, 3, 4), dtype=np.int32)
+
+#随机矩阵
+a = np.random.random((2, 3))
+print(a)
+# [[0.97994275 0.54939347 0.67802913]
+#  [0.85679225 0.1220005  0.84893534]]
+
+#序列矩阵，从0-14的数组，加步长
 a = np.arange(15)
-print(a) #[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
+print(a)  # [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
 
+# 从10-30的每5生成
+a = np.arange(10, 30, step=5)  # [10 15 20 25]
+a = np.arange(10, 30, 5)  # [10 15 20 25]
+# print(a)
+
+a = np.arange(0, 2, 0.3)  # [ 0.   0.3  0.6  0.9  1.2  1.5  1.8]
+# print(a)
+
+
+from numpy import pi
+
+# 区间平均生成数量，100个
+a = np.linspace(0, 2 * pi, 100)
+# print(a)
+# 科学计数
+a = np.sin(np.linspace(0, 2 * pi, 100))
+# print(a)
+
+a = np.floor(10 * np.random.random((2, 2)))
+b = np.floor(10 * np.random.random((2, 2)))
+
+
+
+
+print("================================ 排列矩阵")
+a = np.arange(15) # [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
+
+# reshape
 # 分割为3行5列矩阵
 a = a.reshape(3, 5)
 # -1为自动计算
@@ -212,56 +247,54 @@ print(a)
 #  [ 5  6  7  8  9]
 #  [10 11 12 13 14]]
 
-print(a.shape) #(3, 5)
+print(a.shape)  # (3, 5)
 
-print(a.ndim) #2
+print(a.ndim)  # 2
 
-print(a.dtype.name) #int32
+print(a.dtype.name)  # int32
 
-print(a.size) #15
+print(a.size)  # 15
+
+# 洗牌（只洗行，变换数据索引）
+np.random.shuffle(a)
+print(a)
+# [[10 11 12 13 14]
+#  [ 0  1  2  3  4]
+#  [ 5  6  7  8  9]]
+
+# T行列替换
+print(a.T)
+# [[ 0  5 10]
+#  [ 1  6 11]
+#  [ 2  7 12]
+#  [ 3  8 13]
+#  [ 4  9 14]]
+
+
+
 # 矩阵还原为数组
-print(a.ravel()) #[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
+print(a.ravel())  # [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
 
-#值为0的矩阵
-np.zeros((3, 4))
 
-#值为1的矩阵
-np.ones((2, 3, 4), dtype=np.int32)
 
-#从10-30的每5生成
-a = np.arange(10, 30, 5) #[10 15 20 25]
-# print(a)
-a = np.arange(0, 2, 0.3) #[ 0.   0.3  0.6  0.9  1.2  1.5  1.8]
-# print(a)
-
-from numpy import pi
-#区间平均生成数量，100个
-a = np.linspace(0, 2 * pi, 100)
-# print(a)
-#科学计数
-a = np.sin(np.linspace(0, 2 * pi, 100))
-# print(a)
-
-a = np.floor(10 * np.random.random((2, 2)))
-b = np.floor(10 * np.random.random((2, 2)))
 print("================================ 计算")
 # the product operator * operates elementwise in NumPy arrays
-a = np.array([20, 30, 40, 50]) #[20 30 40 50]
-b = np.arange(4) #[0 1 2 3]
+a = np.array([20, 30, 40, 50])  # [20 30 40 50]
+b = np.arange(4)  # [0 1 2 3]
 print(a)
 print(b)
 # 对应位置相减（同纬度）
-c = a - b #[20 29 38 47]
+c = a - b  # [20 29 38 47]
 print(c)
 
 # 每个数都减1
-c = a - 1 #[19 29 39 49]
+c = a - 1  # [19 29 39 49]
 print(c)
 # 每个数都乘2
-c = b ** 2 #[0 1 4 9]
+c = b ** 2  # [0 1 4 9]
 print(c)
 # 每个数都判断
-print(a < 35) #[ True  True False False]
+print(a < 35)  # [ True  True False False]
 
 # The matrix product can be performed using the dot function or method
 A = np.array([[1, 1],
@@ -270,38 +303,35 @@ B = np.array([[2, 0],
               [3, 4]])
 
 # 对应位置相乘
-print(A*B)
+print(A * B)
 # [[2 0]
 #  [0 4]]
 # 矩阵乘法，行乘列
 print(A.dot(B))
 # [[5 4]
 #  [3 4]]
-print(np.dot(A, B)) # 效果相同
+np.dot(A, B)  # 效果相同
 
 print("================================ 运算符")
 B = np.array([0, 1, 2])
 # e为底的指数函数
-print(np.exp(B)) #[ 1. 2.71828183 7.3890561 ]
+print(np.exp(B))  # [ 1. 2.71828183 7.3890561 ]
 # 根号 平方根
-print(np.sqrt(B)) #[ 0. 1. 1.41421356]
-
+print(np.sqrt(B))  # [ 0. 1. 1.41421356]
 
 a = np.array([[0.12, 1.12, 2.56],
-             [10.12, 12.12, 15.56]])
-#向下取整
+              [10.12, 12.12, 15.56]])
+# 向下取整
 # Return the floor of the input
 a = np.floor(a)
 print(a)
 
-# 行列翻转
-print(a.T)
-# [[  0.  10.]
-#  [  1.  12.]
-#  [  2.  15.]]
 
-#重新定义维度
-print(a.resize((2, 6)))
+# 重新定义维度
+try:
+    print(a.resize(( 6,2)))
+except:
+    print('resize错误')
 # [[  0.   1.   2.  10.  12.  15.]
 #  [  0.   0.   0.   0.   0.   0.]]
 
@@ -325,11 +355,11 @@ print(np.vstack((a, b)))
 #  [7 8]]
 
 # 列切分
-print(np.hsplit(c,2))
+print(np.hsplit(c, 2))
 # [array([[1, 2],[5, 6]]),
 #  array([[3, 4],[7, 8]])]
 
-print(np.hsplit(c,(2,2)))
+print(np.hsplit(c, (2, 2)))
 # [array([[1, 2],[5, 6]]),
 #  array([], shape=(2, 0), dtype=int32),
 #  array([[2],[6]])]
@@ -338,8 +368,6 @@ print(np.hsplit(c,(2,2)))
 print(np.vsplit(c, 2))
 # [array([[1, 2, 3, 4]]),
 #  array([[5, 6, 7, 8]])]
-
-
 
 
 print("================================ 复制")
@@ -375,7 +403,7 @@ print("================================ argmax最大值，tile行列复制")
 data = np.sin(np.arange(20)).reshape(5, 4)
 print(data)
 # 获取最大值的索引
-ind = data.argmax(axis=0) #[2 0 3 1]
+ind = data.argmax(axis=0)  # [2 0 3 1]
 print(ind)
 
 data_max = data[ind, range(data.shape[1])]
@@ -407,15 +435,6 @@ print(a[j])
 # nan is the missing data
 # 1.98600000e+03 is actually 1.986 * 10 ^ 3
 world_alcohol
-
-
-
-
-
-
-
-
-
 
 print("================================ 过期")
 
