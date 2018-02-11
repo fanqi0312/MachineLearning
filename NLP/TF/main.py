@@ -71,6 +71,7 @@ class word2vec():
 
             self.nce_weight = tf.Variable(tf.truncated_normal([self.vocab_size, self.embedding_size],
                                                               stddev=1.0 / math.sqrt(self.embedding_size)))
+            # 类别=词数量
             self.nce_biases = tf.Variable(tf.zeros([self.vocab_size]))
 
             # 将输入序列向量化
@@ -83,8 +84,8 @@ class word2vec():
                     biases=self.nce_biases,
                     labels=self.train_labels,
                     inputs=embed,
-                    num_sampled=self.num_sampled,
-                    num_classes=self.vocab_size
+                    num_sampled=self.num_sampled, #负采样个数
+                    num_classes=self.vocab_size #分类
                 )
             )
 
@@ -96,16 +97,18 @@ class word2vec():
 
             # 计算与指定若干单词的相似度
             self.test_word_id = tf.placeholder(tf.int32, shape=[None])
+            #公式
             vec_l2_model = tf.sqrt(  # 求各词向量的L2模
                 tf.reduce_sum(tf.square(self.embedding_dict), 1, keep_dims=True)
             )
 
             avg_l2_model = tf.reduce_mean(vec_l2_model)
             tf.summary.scalar('avg_vec_model', avg_l2_model)
-
+            # 归一化
             self.normed_embedding = self.embedding_dict / vec_l2_model
             # self.embedding_dict = norm_vec # 对embedding向量正则化
             test_embed = tf.nn.embedding_lookup(self.normed_embedding, self.test_word_id)
+            # 计算相似度
             self.similarity = tf.matmul(test_embed, self.normed_embedding, transpose_b=True)
 
             # 变量初始化
