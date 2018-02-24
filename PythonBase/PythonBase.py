@@ -7,8 +7,7 @@ data_int = 1
 data_float = 0.2
 data_str = "a"
 
-
-print("================================ 字符串")
+print("================================ 打印")
 print('hello, world')
 # hello, world
 
@@ -21,10 +20,22 @@ print('The quick brown fox', 'jumps over', 'the lazy dog')
 # The quick brown fox jumps over the lazy dog
 
 # 占位符（数量一致）
-print("整型{},字符{},浮点{}".format(1,"a",0.1))
+print("整型{},字符{},浮点{}".format(1, "a", 0.1))
 
 # 格式化（数量一致）
-print("整型（前3位）：%.3d 浮点（后3）：%.3f 字符串：%s" % (1,1.2,"a"))
+print("整型（前3位）：%.3d 浮点（后3）：%.3f 字符串：%s" % (1, 1.2, "a"))
+
+
+print("================================ 字符串")
+s = "a,b,c"
+
+# 分割
+ss = s.split(",")
+print(ss)
+
+# 拼接
+s = ",".join(ss)
+print(s)
 
 
 print("================================ 数值")
@@ -37,9 +48,6 @@ print('100 + 200 =', 100 + 200)
 # 整数
 # 按照科学记数法:1.23x109就是1.23e9
 a = 1.23e9
-
-
-
 
 print("================================ 布尔值")
 # 只有True、False两种值,注意大小写
@@ -83,8 +91,6 @@ if age >= 18 and sex == "women":
 if age <= 18 or sex == "women":
     print('or your ', age, sex)
 
-
-
 print("================================ for循环")
 names = ['Michael', 'Bob', 'Tracy']
 for name in names:
@@ -92,16 +98,14 @@ for name in names:
 
 d = {'a': 1, 'b': 2, 'c': 3}
 for key in d:
-    print(key,d[key])
+    print(key, d[key])
 
-
-for i,key in enumerate(d):
-    print("序号{},索引{},值{}".format(i,key,d[key]))
+for i, key in enumerate(d):
+    print("序号{},索引{},值{}".format(i, key, d[key]))
 
 print("================================ 字典 ???")
 
 a = {'x:1, y:2'}
-
 
 print("================================ list集合")
 classmates = ['Michael', 'Bob', 'Tracy']
@@ -118,8 +122,6 @@ classmates[0]
 # 倒数第1个
 classmates[-1]
 # Tracy
-
-
 
 
 # 追加元素到末尾
@@ -151,7 +153,6 @@ s = ['python', 'java', ['asp', 'php'], 'scheme']
 len(s)  # 4
 s[2][1]  # php
 
-
 print("================================ 切片")
 # 创建一个0-99的数列
 L = list(range(100))
@@ -175,14 +176,11 @@ L[:10:2]
 # [0, 2, 4, 6, 8]
 
 
-
-
 print("================================ tuple集合")
 # tuple和list非常类似，但是tuple一旦初始化就不能修改。没有append()，insert()这样的方法
 classmates = ('Michael', 'Bob', 'Tracy')
 # 一个元素时，要加,号。避免(1)的歧义。
 t = (1,)
-
 
 print("================================ dict集合（Map）")
 # 使用键-值（key-value）存储
@@ -193,15 +191,15 @@ d['Michael']
 # 更新值
 d['Michael'] = 99
 
-
 print("================================ set集合")
 # set 是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。
 s = set([1, 2, 3])
 # 删除指定元素
 s.remove(2)
 
-
 print("================================ with")
+
+
 # 用于访问资源，确保过程中是否发生异常都会执行释放资源操作，比如访问文件
 
 # 1.with后面的语句被求值后，返回对象的 __enter__() 方法被调用，
@@ -216,16 +214,13 @@ class Test():
     def __exit__(self, type, value, trace):
         print("In __exit__() with结束调用")
 
+
 def get_example():
     return Test()
 
+
 with get_example() as example:
     print("example:", example)
-
-
-
-
-
 
 print("================================ input()")
 # input(),可以让用户输入字符串，并存放到一个变量里。

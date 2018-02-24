@@ -260,10 +260,11 @@ if __name__ == '__main__':
             while ' ' in line:  # 去空格
                 line = line.replace(' ', '')
             if len(line) > 0:  # 如果句子非空
-                raw_words = list(jieba.cut(line, cut_all=False))  # 分词
+                #2.1 分词
+                raw_words = list(jieba.cut(line, cut_all=False))
                 dealed_words = []
                 for word in raw_words:
-                    # 排除停用词
+                    # 2.2排除停用词
                     if word not in stop_words and word not in ['qingkan520', 'www', 'com', 'http']:
                         raw_word_list.append(word)
                         dealed_words.append(word)
@@ -275,7 +276,7 @@ if __name__ == '__main__':
     word_count = word_count.most_common(30000)  # 过滤不常用的词，取前30000个
     word_list = [x[0] for x in word_count]  # 只取出词，不要频率
 
-    # 创建模型，训练
+    # 3.创建模型，训练
     w2v = word2vec(vocab_list=word_list,  # 词典集
                    embedding_size=200,
                    win_len=2,
