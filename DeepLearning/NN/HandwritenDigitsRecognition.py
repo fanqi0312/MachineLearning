@@ -3,7 +3,7 @@
     手写数字识别
 """
 
-# 每个图片8x8  识别数字：0,1,2,3,4,5,6,7,8,9
+
 
 import numpy as np
 from NeuralNetwork import NeuralNetwork
@@ -17,7 +17,9 @@ from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.preprocessing import LabelBinarizer
 
 # 下载数据集
+# 每个图片8x8  识别数字：0,1,2,3,4,5,6,7,8,9
 digits = load_digits()
+
 # 特征量
 X = digits.data
 y = digits.target

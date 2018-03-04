@@ -20,7 +20,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
 # Import MNIST data
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets("/tmp/data/", one_hot=False)
+mnist = input_data.read_data_sets("/D:\Workspace\Python\MachineLearning\Data\MNIST", one_hot=False)
 
 # Parameters
 num_steps = 500 # Total steps to train
