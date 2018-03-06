@@ -1,6 +1,6 @@
 """
-手写识别
-    简单神经网络
+NN神经网络
+    Tensorflow实现
 
 读取数据集
 设计网络结构784-256-128-10
@@ -36,7 +36,7 @@
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
-mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
+mnist = input_data.read_data_sets("D:\Workspace\Python\MachineLearning\Data\MNIST", one_hot=True)
 
 # NETWORK TOPOLOGIES
 # 网络结构：3层。（784-256-128-10）
@@ -103,7 +103,7 @@ accr = tf.reduce_mean(tf.cast(corr, "float"))
 init = tf.global_variables_initializer()
 print("FUNCTIONS READY")
 
-# 超函数
+# 超参数
 training_epochs = 50
 batch_size = 100
 display_step = 4
